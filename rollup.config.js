@@ -6,6 +6,8 @@ import babel from 'rollup-plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
+import path from 'path'
+import alias from '@rollup/plugin-alias'
 
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
@@ -23,6 +25,9 @@ export default {
     input: config.client.input(),
     output: config.client.output(),
     plugins: [
+      alias({
+        entries: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
+      }),
       replace({
         'process.browser': true,
         'process.env.NODE_ENV': JSON.stringify(mode)
@@ -75,6 +80,9 @@ export default {
     input: config.server.input(),
     output: config.server.output(),
     plugins: [
+      alias({
+        entries: [{ find: '@', replacement: path.resolve(__dirname, 'src') }]
+      }),
       replace({
         'process.browser': false,
         'process.env.NODE_ENV': JSON.stringify(mode)
