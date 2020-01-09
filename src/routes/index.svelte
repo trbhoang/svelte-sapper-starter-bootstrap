@@ -1,5 +1,6 @@
 <svelte:head>
   <title>Sapper project template</title>
+  <meta name="description" content="this is the description" />
 </svelte:head>
 
 <div class="text-center">
