@@ -1,6 +1,6 @@
 {
-  "name": "svelte.sapper.starter",
-  "description": "svelte.sapper.starter",
+  "name": "svelte-sapper-starter",
+  "description": "svelte-sapper-starter",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
