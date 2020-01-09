@@ -6,17 +6,6 @@
 
 <Nav {segment} />
 
-<main>
+<main class="container py-5">
   <slot />
 </main>
-
-<style>
-  main {
-    position: relative;
-    box-sizing: border-box;
-    max-width: 56em;
-    padding: 2em;
-    margin: 0 auto;
-    background-color: white;
-  }
-</style>

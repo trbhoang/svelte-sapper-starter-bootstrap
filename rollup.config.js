@@ -8,10 +8,20 @@ import config from 'sapper/config/rollup.js'
 import pkg from './package.json'
 import path from 'path'
 import alias from '@rollup/plugin-alias'
+import postcss from 'rollup-plugin-postcss'
+import sveltePreprocess from 'svelte-preprocess'
 
 const mode = process.env.NODE_ENV
 const dev = mode === 'development'
 const legacy = !!process.env.SAPPER_LEGACY_BUILD
+
+const preprocess = sveltePreprocess({
+  scss: {
+    includePaths: ['src'],
+    data: '@import \'src/styles/variables.scss\';'
+  },
+  postcss: true
+})
 
 const onwarn = (warning, onwarn) =>
   (warning.code === 'CIRCULAR_DEPENDENCY' &&
@@ -35,7 +45,8 @@ export default {
       svelte({
         dev,
         hydratable: true,
-        emitCss: true
+        emitCss: true,
+        preprocess
       }),
       resolve({
         browser: true,
@@ -89,12 +100,16 @@ export default {
       }),
       svelte({
         generate: 'ssr',
-        dev
+        dev,
+        preprocess
       }),
       resolve({
         dedupe
       }),
-      commonjs()
+      commonjs(),
+      postcss({
+        extract: path.resolve(__dirname, './static/bootstrap.css')
+      })
     ],
     external: Object.keys(pkg.dependencies).concat(
       require('module').builtinModules ||

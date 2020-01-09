@@ -1,0 +1,38 @@
+/**
+ * This purpose of this file is to override bootstrap's default variables.
+ * 
+ * It is necessary the overrides are imported BEFORE the core of bootstrap 
+ * as this ensures availability during development.
+ *
+ * Accessing these specific variables within components will not work, 
+ * unless added to the svelte-preprocess scss data property. 
+ *
+ * Accessing the bootstrap variables directly will not work as expected, 
+ * the cognitive bandwidth required is instead delegated to separating 
+ * concerns as explained below.
+ * 
+ * As a best practice, I allocate this file to only handle overriding the 
+ * bootstrap variables and designate a separate variables.scss file to handle
+ * variables unrelated to bootstrap. The variables.scss file is added to the 
+ * svelte-preprocess scss data property to allow access throughout the app.
+ */
+
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter&display=swap');
+
+$container-max-widths: (
+  xl: 1200px
+);
+
+$font-family-sans-serif: 'Architects Daughter', cursive, -apple-system,
+  BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans',
+  sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+  'Noto Color Emoji';
+
+$theme-colors: (
+  'primary': #ff3e00
+);
+
+$border-radius: 6px;
+$link-color: #063b00;
+$link-hover-color: #6103cc;
+$headings-font-weight: 700;
